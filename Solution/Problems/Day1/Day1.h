@@ -10,6 +10,7 @@ public:
     }
 
 protected:
+    void LoadProblem() override;
     std::optional<uint64_t> SolvePart1() override;
     std::optional<uint64_t> SolvePart2() override;
 
@@ -17,5 +18,5 @@ private:
     std::vector<uint64_t> left_list;
     std::vector<uint64_t> right_list;
 
-    void ReadAndSort();
+
 };

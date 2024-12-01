@@ -14,6 +14,8 @@ void Problem::Solve()
 {
     std::cout << "Solving " << _problem_name << std::endl;
 
+    LoadProblem();
+    
     auto start = std::chrono::high_resolution_clock::now();
     const auto part1_solution = SolvePart1();
     auto end = std::chrono::high_resolution_clock::now();

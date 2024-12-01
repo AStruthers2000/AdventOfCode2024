@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Problems\Day1\input.txt" />
+    <Content Include="Problems\Day1\test.txt" />
     <Content Include="test.txt" />
   </ItemGroup>
   <ItemGroup>

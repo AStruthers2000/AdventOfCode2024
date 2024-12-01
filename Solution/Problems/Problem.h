@@ -12,6 +12,7 @@ public:
     void Solve();
 
 protected:
+    virtual void LoadProblem() = 0;
     virtual std::optional<uint64_t> SolvePart1() = 0;
     virtual std::optional<uint64_t> SolvePart2() = 0;
 

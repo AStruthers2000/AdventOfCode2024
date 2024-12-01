@@ -6,10 +6,35 @@
 #include <string>
 import StringHelper;
 
+void Day1::LoadProblem()
+{
+    for(const auto& line : _lines)
+    {
+        const auto split = SplitLineByToken(line, ' ');
+        const uint64_t left_entry = std::stoi(split[0]);
+        const uint64_t right_entry = std::stoi(split[split.size()-1]);
+        left_list.push_back(left_entry);
+        right_list.push_back(right_entry);
+    }
+
+    std::ranges::sort(left_list);
+    std::ranges::sort(right_list);
+}
+
+//Parallel solution is technically slower, even though it is more interesting. #overhead
 std::optional<uint64_t> Day1::SolvePart1()
 {
-    ReadAndSort();
+    uint64_t dist_sum = 0;
+    for(size_t i = 0; i < left_list.size(); i++)
+    {
+        const uint64_t left = left_list[i];
+        const uint64_t right = right_list[i];
 
+        const auto dist = std::abs(static_cast<int>(left - right));
+        dist_sum += dist;
+    }
+    
+    /*
     std::vector<uint64_t> distances (left_list.size());
     std::transform(std::execution::par_unseq, left_list.begin(), left_list.end(),
         right_list.begin(), distances.begin(),
@@ -19,7 +44,8 @@ std::optional<uint64_t> Day1::SolvePart1()
         });
     
     uint64_t dist_sum = std::reduce(std::execution::par_unseq, distances.begin(), distances.end(), static_cast<uint64_t>(0));
-
+    */
+    
     return dist_sum;
 }
 
@@ -43,19 +69,4 @@ std::optional<uint64_t> Day1::SolvePart2()
         }
     }
     return running_sum;
-}
-
-void Day1::ReadAndSort()
-{
-    for(const auto& line : _lines)
-    {
-        const auto split = SplitLineByToken(line, ' ');
-        const uint64_t left_entry = std::stoi(split[0]);
-        const uint64_t right_entry = std::stoi(split[split.size()-1]);
-        left_list.push_back(left_entry);
-        right_list.push_back(right_entry);
-    }
-
-    std::ranges::sort(left_list);
-    std::ranges::sort(right_list);
 }
