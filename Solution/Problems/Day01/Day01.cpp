@@ -1,4 +1,4 @@
-﻿#include "Day1.h"
+﻿#include "Day01.h"
 
 #include <algorithm>
 #include <execution>
@@ -6,7 +6,7 @@
 #include <string>
 import StringHelper;
 
-void Day1::LoadProblem()
+void Day01::LoadProblem()
 {
     for(const auto& line : _lines)
     {
@@ -22,7 +22,7 @@ void Day1::LoadProblem()
 }
 
 //Parallel solution is technically slower, even though it is more interesting. #overhead
-std::optional<uint64_t> Day1::SolvePart1()
+std::optional<uint64_t> Day01::SolvePart1()
 {
     uint64_t dist_sum = 0;
     for(size_t i = 0; i < left_list.size(); i++)
@@ -49,7 +49,7 @@ std::optional<uint64_t> Day1::SolvePart1()
     return dist_sum;
 }
 
-std::optional<uint64_t> Day1::SolvePart2()
+std::optional<uint64_t> Day01::SolvePart2()
 {
     uint64_t running_sum = 0;
     for(const auto& left_num : left_list)

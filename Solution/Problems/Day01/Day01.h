@@ -1,10 +1,10 @@
 ﻿#pragma once
 #include "../Problem.h"
 
-class Day1 : public Problem
+class Day01 : public Problem
 {
 public:
-    Day1(const std::string_view& filename)
+    Day01(const std::string_view& filename)
         : Problem(filename, "Year 2024 Day 1: Historian Hysteria")
     {
     }

@@ -20,12 +20,12 @@ void Problem::Solve()
     const auto part1_solution = SolvePart1();
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Part 1 solution:\t" << part1_solution.value_or(-1) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
+    std::cout << "Part 1 solution:\t" << part1_solution.value_or(0) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
     
     start = std::chrono::high_resolution_clock::now();
     const auto part2_solution = SolvePart2();
     end = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "Part 2 solution:\t" << part2_solution.value_or(-1) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
+    std::cout << "Part 2 solution:\t" << part2_solution.value_or(0) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
     std::cout << "========================================" << std::endl;
 }
