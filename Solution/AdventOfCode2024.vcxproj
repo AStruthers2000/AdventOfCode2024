@@ -241,7 +241,6 @@
     <Content Include="Problems\Day24\test.txt" />
     <Content Include="Problems\Day25\input.txt" />
     <Content Include="Problems\Day25\test.txt" />
-    <Content Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utils\Strings\StringUtils.cpp" />

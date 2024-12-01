@@ -46,7 +46,6 @@ std::optional<uint64_t> Day01::SolvePart1()
     
     uint64_t dist_sum = std::reduce(std::execution::par_unseq, distances.begin(), distances.end(), static_cast<uint64_t>(0));
     
-    
     return dist_sum;
 }
 
