@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+#Advent of Code input files
+input.txt
