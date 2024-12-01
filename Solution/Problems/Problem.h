@@ -6,7 +6,8 @@
 class Problem
 {
 public:
-    Problem(std::string_view filename);
+    virtual ~Problem() = default;
+    Problem(std::string_view file_name, const std::optional<std::string_view>& problem_name);
 
     void Solve();
 
@@ -14,5 +15,8 @@ protected:
     virtual std::optional<uint64_t> SolvePart1() = 0;
     virtual std::optional<uint64_t> SolvePart2() = 0;
 
-    std::vector<std::string> lines;
+    std::vector<std::string> _lines;
+
+private:
+    std::string_view _problem_name;
 };

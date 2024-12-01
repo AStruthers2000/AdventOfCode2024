@@ -1,6 +1,7 @@
 ﻿#include "Day1.h"
 
 #include <algorithm>
+#include <execution>
 #include <iostream>
 #include <string>
 import StringHelper;
@@ -8,15 +9,17 @@ import StringHelper;
 std::optional<uint64_t> Day1::SolvePart1()
 {
     ReadAndSort();
-    uint64_t dist_sum = 0;
-    for(size_t i = 0; i < left_list.size(); i++)
-    {
-        const uint64_t left = left_list[i];
-        const uint64_t right = right_list[i];
 
-        const auto dist = std::abs(static_cast<int>(left - right));
-        dist_sum += dist;
-    }
+    std::vector<uint64_t> distances (left_list.size());
+    std::transform(std::execution::par_unseq, left_list.begin(), left_list.end(),
+        right_list.begin(), distances.begin(),
+        [](const uint64_t left, const uint64_t right)
+        {
+            return static_cast<uint64_t>(std::abs(static_cast<int>(left - right)));
+        });
+    
+    uint64_t dist_sum = std::reduce(std::execution::par_unseq, distances.begin(), distances.end(), static_cast<uint64_t>(0));
+
     return dist_sum;
 }
 
@@ -44,7 +47,7 @@ std::optional<uint64_t> Day1::SolvePart2()
 
 void Day1::ReadAndSort()
 {
-    for(const auto& line : lines)
+    for(const auto& line : _lines)
     {
         const auto split = SplitLineByToken(line, ' ');
         const uint64_t left_entry = std::stoi(split[0]);

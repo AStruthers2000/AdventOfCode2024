@@ -1,21 +1,29 @@
 ﻿#include "Problem.h"
 
+#include <chrono>
 #include <iostream>
 import FileParsing;
 
-Problem::Problem(std::string_view filename)
+Problem::Problem(std::string_view file_name, const std::optional<std::string_view>& problem_name)
 {
-    lines = ReadFromFile(filename);
+    _lines = ReadFromFile(file_name);
+    _problem_name = problem_name.value_or("=====DAY NOT IMPLEMENTED=====");
 }
 
 void Problem::Solve()
 {
-    std::cout << "Solving problem"  << std::endl;
+    std::cout << "Solving " << _problem_name << std::endl;
 
+    auto start = std::chrono::high_resolution_clock::now();
     const auto part1_solution = SolvePart1();
-    std::cout << "Part 1 solution: " << part1_solution.value_or(0) << std::endl;
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << "Part 1 solution:\t" << part1_solution.value_or(-1) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
     
-    
+    start = std::chrono::high_resolution_clock::now();
     const auto part2_solution = SolvePart2();
-    std::cout << "Part 2 solution: " << part2_solution.value_or(0) << std::endl;
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    std::cout << "Part 2 solution:\t" << part2_solution.value_or(-1) << "\n\tSolved in " << static_cast<double>(duration.count()) / 1e+6 << " seconds." << std::endl;
+    std::cout << "========================================" << std::endl;
 }
