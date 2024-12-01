@@ -157,14 +157,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AdventOfCode2024.cpp" />
+    <ClCompile Include="Problems\Day1\Day1.cpp" />
+    <ClCompile Include="Problems\Problem.cpp" />
     <ClCompile Include="Utils\FileParsing\FileParse.cppm" />
     <ClCompile Include="Utils\Math\DiscreteMath.cpp" />
     <ClCompile Include="Utils\Math\Math.cppm" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Problems\Day1\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Problems\Day1\input.txt" />
     <Content Include="test.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +173,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Utils\Math\DiscreteMath.cppm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Problems\Day1\Day1.h" />
+    <ClInclude Include="Problems\Problem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

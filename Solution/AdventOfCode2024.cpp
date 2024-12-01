@@ -7,6 +7,9 @@ import Math;
 import <string>;
 import <vector>;
 
+#include "Problems/Problem.h"
+#include "Problems/Day1/Day1.h"
+
 int main(int argc, char* argv[])
 {
     const std::string filename = "test.txt";
@@ -29,6 +32,11 @@ int main(int argc, char* argv[])
     const auto is2 = IsNumberPowerOfTwo(2);
     const auto big120 = IsNumberPowerOfTwo<uint64_t>(128);
     const auto probablynot = IsNumberPowerOfTwo<unsigned long>(333333333);
+
+    std::vector<std::shared_ptr<Problem>> problems;
+    problems.push_back(std::make_shared<Day1>(R"(.\Problems\Day1\input.txt)"));
+
+    problems[0]->Solve();
     
     return 0;
 }
