@@ -112,6 +112,8 @@
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>MinSpace</Optimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

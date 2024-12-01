@@ -24,6 +24,7 @@ void Day01::LoadProblem()
 //Parallel solution is technically slower, even though it is more interesting. #overhead
 std::optional<uint64_t> Day01::SolvePart1()
 {
+    /*
     uint64_t dist_sum = 0;
     for(size_t i = 0; i < left_list.size(); i++)
     {
@@ -33,8 +34,8 @@ std::optional<uint64_t> Day01::SolvePart1()
         const auto dist = std::abs(static_cast<int>(left - right));
         dist_sum += dist;
     }
+    */
     
-    /*
     std::vector<uint64_t> distances (left_list.size());
     std::transform(std::execution::par_unseq, left_list.begin(), left_list.end(),
         right_list.begin(), distances.begin(),
@@ -44,7 +45,7 @@ std::optional<uint64_t> Day01::SolvePart1()
         });
     
     uint64_t dist_sum = std::reduce(std::execution::par_unseq, distances.begin(), distances.end(), static_cast<uint64_t>(0));
-    */
+    
     
     return dist_sum;
 }
