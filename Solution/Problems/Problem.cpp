@@ -7,8 +7,16 @@ import FileParsing;
 
 Problem::Problem(std::string_view file_name, const std::optional<std::string_view>& problem_name)
 {
-    _lines = ReadFromFile(file_name);
     _problem_name = problem_name.value_or("=====DAY NOT IMPLEMENTED=====");
+    try
+    {
+        _lines = ReadFromFile(file_name);
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return;
+    }
 }
 
 void Problem::Solve()
