@@ -2,6 +2,7 @@
 
 #include <ranges>
 import StringHelper;
+import Math;
 import <string>;
 import <algorithm>;
 
@@ -10,12 +11,11 @@ void Day02::LoadProblem()
     for (const auto& line : _lines)
     {
         const auto split = SplitLineByToken(line, ' ');
-        std::vector<uint64_t> numbers;
-        for (const auto& token : split)
+        const auto numbers = ConvertStringVectorToIntegral<uint64_t>(split);
+        if (numbers.has_value())
         {
-            numbers.emplace_back(std::stoi(token));
+            report_levels.emplace(numbers.value(), 999);
         }
-        report_levels.emplace(numbers, 999);
     }
     CalculateSafetyFactor();
 }
@@ -84,7 +84,7 @@ bool Day02::CheckSafety(const std::vector<uint64_t>& safety_factors)
     {
         for (size_t i = 0; i < safety_factors.size() - 1; ++i)
         {
-            const auto elem_dist = std::abs(static_cast<int>(safety_factors[i] - safety_factors[i + 1]));
+            const auto elem_dist = UnsignedDistance(safety_factors[i], safety_factors[i + 1]).distance;;
             if (elem_dist < 1 || elem_dist > 3)
             {
                 return false;

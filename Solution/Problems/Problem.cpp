@@ -56,9 +56,9 @@ void Problem::Solve(int mode)
     std::cout << "||  " << (mode == 1 ? "Full Input" : "TEST INPUT") << "\t\t|  Runtime (seconds)\t|  Percent of runtime   ||" << std::endl;
     std::cout << "||----------------------+-----------------------+-----------------------||" << std::endl;
     std::cout << std::format("||  Loading/parsing\t|  {:08.6f}\t\t|  {:06.3f}%\t\t||\n", load_time, (load_time / total_time) * 100.0);
-    std::cout << std::format("||  Part 1        \t|  {:08.6f}\t\t|  {:06.3f}%\t\t||\n", part1_time, (part1_time / total_time) * 100.0);
-    std::cout << std::format("||  Part 2        \t|  {:08.6f}\t\t|  {:06.3f}%\t\t||\n", part2_time, (part2_time / total_time) * 100.0);
+    std::cout << std::format("||  Part 1         \t|  {:08.6f}\t\t|  {:06.3f}%\t\t||\n", part1_time, (part1_time / total_time) * 100.0);
+    std::cout << std::format("||  Part 2         \t|  {:08.6f}\t\t|  {:06.3f}%\t\t||\n", part2_time, (part2_time / total_time) * 100.0);
     std::cout << "||----------------------+-----------------------+-----------------------||" << std::endl;
-    std::cout << std::format("||  Total time    \t|  {:08.6f}\t\t|=======================||", total_time) << std::endl;
+    std::cout << std::format("||  Total time     \t|  {:08.6f}\t\t|=======================||", total_time) << std::endl;
     std::cout << "\\\\======================================================================//" << std::endl;
 }

@@ -5,16 +5,21 @@
 #include <iostream>
 #include <string>
 import StringHelper;
+import Math;
 
 void Day01::LoadProblem()
 {
     for(const auto& line : _lines)
     {
         const auto split = SplitLineByToken(line, ' ');
-        const uint64_t left_entry = std::stoi(split[0]);
-        const uint64_t right_entry = std::stoi(split[split.size()-1]);
-        left_list.push_back(left_entry);
-        right_list.push_back(right_entry);
+        const auto int_split = ConvertStringVectorToIntegral<uint64_t>(split);
+        if (int_split.has_value())
+        {
+            const uint64_t left_entry = int_split.value()[0];
+            const uint64_t right_entry = int_split.value()[1];
+            left_list.push_back(left_entry);
+            right_list.push_back(right_entry);
+        }
     }
 
     std::ranges::sort(left_list);
@@ -31,8 +36,8 @@ std::optional<uint64_t> Day01::SolvePart1()
         const uint64_t left = left_list[i];
         const uint64_t right = right_list[i];
 
-        const auto dist = std::abs(static_cast<int>(left - right));
-        dist_sum += dist;
+        //const auto dist = std::abs(static_cast<int>(left - right));
+        dist_sum += UnsignedDistance(left, right).distance;
     }
     */
     
@@ -41,7 +46,7 @@ std::optional<uint64_t> Day01::SolvePart1()
         right_list.begin(), distances.begin(),
         [](const uint64_t left, const uint64_t right)
         {
-            return static_cast<uint64_t>(std::abs(static_cast<int>(left - right)));
+            return UnsignedDistance(left, right).distance;
         });
     
     uint64_t dist_sum = std::reduce(std::execution::par_unseq, distances.begin(), distances.end(), static_cast<uint64_t>(0));
