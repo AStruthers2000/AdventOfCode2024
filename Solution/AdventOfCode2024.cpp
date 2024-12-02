@@ -36,8 +36,8 @@ import <vector>;
 
 enum RunMode
 {
-    Test,
-    Run
+    Test = 0,
+    Run = 1
 };
 
 constexpr RunMode mode = Run;
@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 {
     const auto problems = LoadProblems();
 
-    problems[day - 1]->Solve();
+    problems[day - 1]->Solve(mode);
     
     return 0;
 }

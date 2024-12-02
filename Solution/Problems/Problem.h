@@ -9,7 +9,7 @@ public:
     virtual ~Problem() = default;
     Problem(std::string_view file_name, const std::optional<std::string_view>& problem_name);
 
-    void Solve();
+    void Solve(int mode);
 
 protected:
     virtual void LoadProblem() = 0;

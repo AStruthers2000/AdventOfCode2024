@@ -72,12 +72,16 @@ bool Day02::CheckSafety(const std::vector<uint64_t>& safety_factors)
 {
     auto report_ascending = safety_factors;
     auto report_descending = safety_factors;
+    //could have done the copying this way as well (slower but probably safer):
+    //std::ranges::copy(safety_factors, std::back_inserter(report_ascending));
+    //std::ranges::copy(safety_factors, std::back_inserter(report_descending));
+    
     std::ranges::sort(report_ascending, std::less<>());
     std::ranges::sort(report_descending, std::greater<>());
 
-    if (safety_factors == report_ascending || safety_factors == report_descending)
+    if (std::ranges::equal(safety_factors, report_ascending)
+        || std::ranges::equal(safety_factors, report_descending))
     {
-        int bad_level_count = 0;
         for (size_t i = 0; i < safety_factors.size() - 1; ++i)
         {
             const auto elem_dist = std::abs(static_cast<int>(safety_factors[i] - safety_factors[i + 1]));
@@ -88,8 +92,6 @@ bool Day02::CheckSafety(const std::vector<uint64_t>& safety_factors)
         }
         return true;
     }
-    else
-    {
-        return false;
-    }
+
+    return false;
 }
