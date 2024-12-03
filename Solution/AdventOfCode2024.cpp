@@ -4,6 +4,7 @@ import StringHelper;
 import Math;
 
 #include <iostream>
+#include <numbers>
 import <string>;
 import <vector>;
 
@@ -41,11 +42,12 @@ enum RunMode
 };
 
 constexpr RunMode mode = Run;
-constexpr int day = 1;
+constexpr int day = 3;
 
 std::vector<std::unique_ptr<Problem>> LoadProblems()
 {
     std::vector<std::unique_ptr<Problem>> problems;
+    
     problems.push_back(std::make_unique<Day01>(mode == Test ? R"(.\Problems\Day01\test.txt)" : R"(.\Problems\Day01\input.txt)"));
     problems.push_back(std::make_unique<Day02>(mode == Test ? R"(.\Problems\Day02\test.txt)" : R"(.\Problems\Day02\input.txt)"));
     problems.push_back(std::make_unique<Day03>(mode == Test ? R"(.\Problems\Day03\test.txt)" : R"(.\Problems\Day03\input.txt)"));

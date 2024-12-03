@@ -13,7 +13,13 @@ export bool IsVectorEntirelyN(const std::string& v, const char& n);
 
 export int CountOccurenceInString(const std::string& str, const char& c);
 
+export bool ContainsSubstring(const std::string& str, const std::string& sub);
+
 export std::vector<std::string> SplitLineByToken(const std::string& line, const char token);
+
+export std::vector<std::string> SplitLineByToken(const std::string& line, const std::string& token);
+
+export bool ContainsOnlyDigits(const std::string& str);
 
 //export template <std::integral T> std::vector<T> ConvertStringVectorToIntegral(const std::vector<std::string>& v);
 
