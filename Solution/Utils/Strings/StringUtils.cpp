@@ -1,8 +1,10 @@
+#include <regex>
 module StringHelper;
 
 //import <fstream>;
 //#include <sstream>
 import <algorithm>;
+
 
 int CountOccurenceInString(const std::string& str, const char& c)
 {
@@ -59,6 +61,45 @@ std::vector<std::string> SplitLineByToken(const std::string& line, const std::st
     // Add the last segment after the final token
     result.emplace_back(line.substr(start));
     
+    return result;
+}
+
+std::string regexEscape(const std::string& str) {
+    static const std::string regexSpecialChars = R"([.^$|(){}*+?\\])";
+    std::string escaped;
+    for (char c : str) {
+        if (regexSpecialChars.find(c) != std::string::npos) {
+            escaped += '\\'; // Escape special characters
+        }
+        escaped += c;
+    }
+    return escaped;
+}
+
+std::vector<std::string> SplitLineByToken(const std::string& line, const std::vector<std::string>& tokens)
+{
+    
+    std::string regexPattern;
+    for (size_t i = 0; i < tokens.size(); ++i) {
+        regexPattern += regexEscape(tokens[i]);
+        if (i != tokens.size() - 1) {
+            regexPattern += "|";
+        }
+    }
+
+    // Use regex to split the string
+    std::regex tokenRegex(regexPattern);
+    std::sregex_token_iterator iter(line.begin(), line.end(), tokenRegex, -1);
+    std::sregex_token_iterator end;
+
+    // Collect and return the results
+    std::vector<std::string> result;
+    for (; iter != end; ++iter) {
+        if (!iter->str().empty()) {
+            result.push_back(*iter);
+        }
+    }
+
     return result;
 }
 
