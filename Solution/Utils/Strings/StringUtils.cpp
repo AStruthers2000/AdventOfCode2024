@@ -1,3 +1,4 @@
+module;
 #include <regex>
 module StringHelper;
 
@@ -32,7 +33,7 @@ std::vector<std::string> SplitLineByToken(const std::string& line, const char to
     // Use std::string_view for efficient splitting
     //std::string_view line_view = line;
     size_t start = 0;
-    size_t end = 0;
+    size_t end;
 
     // Split by the token
     while ((end = line.find(token, start)) != std::string_view::npos)
@@ -106,4 +107,112 @@ std::vector<std::string> SplitLineByToken(const std::string& line, const std::ve
 bool ContainsOnlyDigits(const std::string& str)
 {
     return !str.empty() && std::ranges::all_of(str, ::isdigit);
+}
+
+std::map<Direction, std::optional<std::string>> BuildStringsFromGrid(
+    const std::vector<std::vector<char>>& grid, std::pair<int, int> position, const int length)
+{
+    using std::optional;
+    using std::string;
+
+    std::map<Direction, optional<string>> result;
+
+    const auto rows = static_cast<int>(grid.size());
+    const auto cols = static_cast<int>(rows > 0 ? grid[0].size() : 0);
+
+    // Lambda to check if a position is within grid bounds
+    auto is_valid_position = [&](const int row, const int col)
+    {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    };
+
+    // Lambda to construct a string in a given direction
+    auto constructString = [&](const int start_row, const int start_col, const int d_row, const int d_col) -> optional<string>
+    {
+        string constructed_string;
+        for (int i = 0; i < length; ++i)
+        {
+            const int new_row = start_row + i * d_row;
+            const int new_col = start_col + i * d_col;
+            if (!is_valid_position(new_row, new_col))
+            {
+                return std::nullopt;
+            }
+            constructed_string.push_back(grid[new_row][new_col]);
+        }
+        return constructed_string;
+    };
+
+    // Define directional offsets
+    const std::vector<std::pair<int, int>> directions = {
+        {-1,  0}, // Up
+        { 1,  0}, // Down
+        { 0, -1}, // Left
+        { 0,  1}, // Right
+        {-1, -1}, // Diag_Up_Left
+        {-1,  1}, // Diag_Up_Right
+        { 1, -1}, // Diag_Down_Left
+        { 1,  1}  // Diag_Down_Right
+    };
+
+    // Starting position
+    const auto& [startRow, startCol] = position;
+
+    // Iterate over all directions and build strings
+    for (size_t dir = 0; dir < directions.size(); ++dir)
+    {
+        const auto& [d_row, d_col] = directions[dir];
+        result[static_cast<Direction>(dir)] = constructString(startRow, startCol, d_row, d_col);
+    }
+
+    return result;
+}
+
+std::map<Direction, std::optional<char>> GetSurroundingElements(
+    const std::vector<std::vector<char>>& grid, std::pair<int, int> position) 
+{
+    using std::optional;
+
+    std::map<Direction, optional<char>> surrounding_elements;
+
+    const int rows = static_cast<int>(grid.size());
+    const int cols = static_cast<int>(rows > 0 ? grid[0].size() : 0);
+
+    // Lambda to check if a position is within grid bounds
+    auto isValidPosition = [&](const int row, const int col)
+    {
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    };
+
+    // Define directional offsets
+    const std::vector<std::pair<int, int>> offsets = {
+        {-1,  0}, // Up
+        { 1,  0}, // Down
+        { 0, -1}, // Left
+        { 0,  1}, // Right
+        {-1, -1}, // Diag_Up_Left
+        {-1,  1}, // Diag_Up_Right
+        { 1, -1}, // Diag_Down_Left
+        { 1,  1}  // Diag_Down_Right
+    };
+
+    const auto& [start_row, start_col] = position;
+
+    // Iterate over all directions
+    for (size_t dir = 0; dir < offsets.size(); ++dir)
+    {
+        const auto& [d_row, d_col] = offsets[dir];
+        int new_row = start_row + d_row;
+        int new_col = start_col + d_col;
+
+        if (isValidPosition(new_row, new_col))
+        {
+            surrounding_elements[static_cast<Direction>(dir)] = grid[new_row][new_col];
+        }else
+        {
+            surrounding_elements[static_cast<Direction>(dir)] = std::nullopt;
+        }
+    }
+
+    return surrounding_elements;
 }

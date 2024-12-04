@@ -2,6 +2,7 @@
 
 import <string>;
 import <algorithm>;
+import <map>;
 import <vector>;
 
 export template <typename T> bool IsVectorEntirelyN(const std::vector<T>& v, const T& n)
@@ -40,7 +41,25 @@ std::optional<std::vector<T>> ConvertStringVectorToIntegral(const std::vector<st
         }
     }
     return numbers;
-} 
+}
+
+export enum Direction : uint8_t
+{
+    Up,
+    Down,
+    Left,
+    Right,
+    Diag_Up_Left,
+    Diag_Up_Right,
+    Diag_Down_Left,
+    Diag_Down_Right
+};
+
+export std::map<Direction, std::optional<std::string>> BuildStringsFromGrid(
+        const std::vector<std::vector<char>>& grid, std::pair<int, int> position, int length);
+
+export std::map<Direction, std::optional<char>> GetSurroundingElements(
+    const std::vector<std::vector<char>>& grid, std::pair<int, int> position);
 
 
 
