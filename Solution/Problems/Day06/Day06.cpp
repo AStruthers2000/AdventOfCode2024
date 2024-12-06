@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <ios>
 #include <iostream>
+#include <set>
 import StringHelper;
 
 void Day06::LoadProblem()
@@ -62,8 +63,127 @@ std::optional<uint64_t> Day06::SolvePart2()
         StepThroughGrid(guard_direction);
         guard_in_grid = IsValidLocation(guard_location);
         if (!guard_in_grid) break;
-        //grid[guard_location.first][guard_location.second] = 'X';
+        grid[guard_location.first][guard_location.second] = 'X';
+
+        bool loop_detected = false;
+        //if there is an obstacle to my right, let's try and place an obstacle directly in front of me
+            //and see if I end up at loop_detect_location traveling in the direction of loop_detect_direction TWICE
+            auto paused_grid = grid;
+            auto paused_location = guard_location;
+            auto paused_direction = guard_direction;
+
+            std::pair<int, int> obstacle_location = guard_location;
+            GetTileInFront(obstacle_location, guard_direction);
+            if (IsValidLocation(obstacle_location))
+            {
+                grid[obstacle_location.first][obstacle_location.second] = '#';
+
+                std::set<std::tuple<std::pair<int, int>, Direction>> guard_positions;
+                guard_positions.insert(std::make_tuple(guard_location, guard_direction));
+                bool simulated_guard_in_grid = true;
+                while (simulated_guard_in_grid)
+                {
+                    StepThroughGrid(guard_direction);
+                    simulated_guard_in_grid = IsValidLocation(guard_location);
+                    if (!simulated_guard_in_grid) break;
+                    //grid[guard_location.first][guard_location.second] = 'X';
+
+                    /*
+                    if (guard_location == loop_detect_location && guard_direction == loop_detect_direction)
+                    {
+                        been_there_count++;
+                    }
+                    */
+                    if (guard_positions.contains(std::make_tuple(guard_location, guard_direction)))
+                    {
+                        loop_detected = true;
+                        break;
+                    }
+                    
+                    guard_positions.insert(std::make_tuple(guard_location, guard_direction));
+                }
+
+                if (loop_detected)
+                {
+                    ++loops_detected;
+                    //std::cout << loops_detected << "\n";
+                }
+            }
+
+            grid = paused_grid;
+            guard_location = paused_location;
+            guard_direction = paused_direction;
+
+        /*
+        Direction look_direction = RotateDirection(guard_direction);
+        auto temp_location = guard_location;
+        auto prev_temp_location = temp_location;;
         
+        bool loop_detected = false;
+        bool wall_to_right = false;
+        char tile = GetTileInFront(temp_location, look_direction);
+        while (tile != '\0')
+        {
+            if (tile == '#')
+            {
+                wall_to_right = true;
+                break;
+            }
+            prev_temp_location = temp_location;
+            tile = GetTileInFront(temp_location, look_direction);
+        }
+
+        if (wall_to_right)
+        {
+            auto loop_detect_location = prev_temp_location;
+            auto loop_detect_direction = look_direction;
+            int been_there_count = 0;
+
+            //if there is an obstacle to my right, let's try and place an obstacle directly in front of me
+            //and see if I end up at loop_detect_location traveling in the direction of loop_detect_direction TWICE
+            auto paused_grid = grid;
+            auto paused_location = guard_location;
+            auto paused_direction = guard_direction;
+
+            std::pair<int, int> obstacle_location = guard_location;
+            GetTileInFront(obstacle_location, guard_direction);
+            if (IsValidLocation(obstacle_location))
+            {
+                grid[obstacle_location.first][obstacle_location.second] = '#';
+
+                std::set<std::tuple<std::pair<int, int>, Direction>> guard_positions;
+                guard_positions.insert(std::make_tuple(guard_location, guard_direction));
+                bool simulated_guard_in_grid = true;
+                while (simulated_guard_in_grid)
+                {
+                    StepThroughGrid(guard_direction);
+                    simulated_guard_in_grid = IsValidLocation(guard_location);
+                    if (!simulated_guard_in_grid) break;
+                    //grid[guard_location.first][guard_location.second] = 'X';
+
+                    if (guard_positions.contains(std::make_tuple(guard_location, guard_direction)))
+                    {
+                        loop_detected = true;
+                        break;
+                    }
+                    
+                    guard_positions.insert(std::make_tuple(guard_location, guard_direction));
+                }
+
+                if (loop_detected)
+                {
+                    ++loops_detected;
+                    //std::cout << loops_detected << "\n";
+                }
+            }
+
+            grid = paused_grid;
+            guard_location = paused_location;
+            guard_direction = paused_direction;
+        }
+        */
+
+        /*
         //now we have made a step, and we know it was a valid step
         //what we want to do now is:
         //1. check the tile in the grid to our right (from the direction we are currently facing)
@@ -77,6 +197,7 @@ std::optional<uint64_t> Day06::SolvePart2()
         bool loop_detected = false;
         char tile = GetTileInFront(temp_location, look_direction);
         char prev_tile = grid[guard_location.first][guard_location.second];
+        char second_prev = '\0';
         while (tile != '\0')
         {
             if (tile == '#')
@@ -87,8 +208,13 @@ std::optional<uint64_t> Day06::SolvePart2()
                 }
                 break;
             }
+            second_prev = prev_tile;
             prev_tile = tile;
             tile = GetTileInFront(temp_location, look_direction);
+        }
+        if (tile == '\0' && second_prev == 'X')
+        {
+            loop_detected = true;
         }
 
         if (loop_detected)
@@ -110,6 +236,7 @@ std::optional<uint64_t> Day06::SolvePart2()
             
             ++loops_detected;
         }
+        */
 
         
     }
