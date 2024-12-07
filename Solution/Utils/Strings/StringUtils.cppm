@@ -23,8 +23,6 @@ export std::vector<std::string> SplitLineByToken(const std::string& line, const 
 
 export bool ContainsOnlyDigits(const std::string& str);
 
-//export template <std::integral T> std::vector<T> ConvertStringVectorToIntegral(const std::vector<std::string>& v);
-
 export template <std::integral T>
 std::optional<std::vector<T>> ConvertStringVectorToIntegral(const std::vector<std::string>& v)
 {
