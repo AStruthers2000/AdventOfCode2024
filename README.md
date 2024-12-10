@@ -4,9 +4,18 @@
 Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repository! This project showcases my solutions to the daily programming challenges presented in Advent of Code 2024. Each solution is written in **C++23**, adhering to modern object-oriented programming practices and leveraging the latest language features.
 
 ## ⭐ Stats
-| Day | Stars | Benchmark | Problem |
-|-----|-------|------------|---------|
-| 1   | ⭐⭐  | | [Open on AoC](https://adventofcode.com/2024/day/01 |
+| Day | Stars | Benchmark (Parse\|Part 1\|Part 2) | Problem |
+|:-----:|:-------|:------------|:---------|
+| 1     | ⭐⭐  | 18.56ms \| 98µs \| 224µs | [Open on AoC](https://adventofcode.com/2024/day/01) |
+| 2   | ⭐⭐  | 31.22ms \| 50µs \| 43µs  | [Open on AoC](https://adventofcode.com/2024/day/02) |
+| 3   | ⭐⭐  | 81.70ms \| 26µs \| 13µs  | [Open on AoC](https://adventofcode.com/2024/day/03) |
+| 4   | ⭐⭐  | 311µs   \| 61.26ms \| 34.04ms | [Open on AoC](https://adventofcode.com/2024/day/04) |
+| 5   | ⭐⭐  | 10.95ms \| 9.21ms \| 30.76ms | [Open on AoC](https://adventofcode.com/2024/day/05) |
+| 6   | ⭐  | 18.56ms \| 98µs \| 224µs | [Open on AoC](https://adventofcode.com/2024/day/06) |
+| 7   | ⭐  | 18.56ms \| 98µs \| 224µs | [Open on AoC](https://adventofcode.com/2024/day/07) |
+| 8   | ⭐⭐  | 216µs \| 136µs \| 151µs | [Open on AoC](https://adventofcode.com/2024/day/08) |
+| 9   |   | 18.56ms \| 98µs \| 224µs | [Open on AoC](https://adventofcode.com/2024/day/09) |
+| 10   | ⭐⭐  | 30.93ms \| 14µs \| 11µs | [Open on AoC](https://adventofcode.com/2024/day/10) |
 
 ## 🚀 Project Overview
 
