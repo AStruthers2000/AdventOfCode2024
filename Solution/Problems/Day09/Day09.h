@@ -13,7 +13,12 @@ protected:
     void LoadProblem() override;
     std::optional<uint64_t> SolvePart1() override;
     std::optional<uint64_t> SolvePart2() override;
-    
+
+private:
+    using Disk = std::vector<std::optional<int>>;
+    Disk expanded_disk;
+
+    Disk SortIndividual();
 };
 
 

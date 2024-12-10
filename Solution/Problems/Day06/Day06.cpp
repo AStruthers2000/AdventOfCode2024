@@ -54,6 +54,7 @@ std::optional<uint64_t> Day06::SolvePart2()
 {
     ResetGrid();
     grid[initial_guard_location.first][initial_guard_location.second] = 'X';
+
     
     int loops_detected = 0;
     Direction guard_direction = Up;
