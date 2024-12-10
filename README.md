@@ -5,7 +5,7 @@ Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repositor
 
 ## ⭐ Stats
 | Day | Stars | Parse | Part 1 | Part 2 | Problem |
-|:-----:|:-------|:---------:|:---------:|:---------:|:-------------|
+|:-----:|:-------|:---------:|:---------:|:---------:|:-------------:|
 | 1     | ⭐⭐  | 18.56ms | 98µs | 224µs | [Open on AoC](https://adventofcode.com/2024/day/1) |
 | 2   | ⭐⭐  | 31.22ms | 50µs | 43µs  | [Open on AoC](https://adventofcode.com/2024/day/2) |
 | 3   | ⭐⭐  | 81.70ms | 26µs | 13µs  | [Open on AoC](https://adventofcode.com/2024/day/3) |
