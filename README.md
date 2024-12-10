@@ -14,7 +14,7 @@ Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repositor
 | [6](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day06)   | ⭐  | 367µs | 577µs | N/A | [Open on AoC](https://adventofcode.com/2024/day/6) |
 | [7](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day07)   | ⭐  | 19.21ms | 7.864ms | N/A | [Open on AoC](https://adventofcode.com/2024/day/7) |
 | [8](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day08)   | ⭐⭐  | 216µs | 136µs | 151µs | [Open on AoC](https://adventofcode.com/2024/day/8) |
-| [9](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day09)   |   | N/A | N/A | N/A | [Open on AoC](https://adventofcode.com/2024/day/9) |
+| [9](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day09)   | ⭐  | 5.0ms | 12.92ms | N/A | [Open on AoC](https://adventofcode.com/2024/day/9) |
 | [10](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day10)   | ⭐⭐  | 30.93ms | 14µs | 11µs | [Open on AoC](https://adventofcode.com/2024/day/10) |
 
 ## 🚀 Project Overview
