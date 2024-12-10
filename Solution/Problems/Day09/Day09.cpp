@@ -1,7 +1,10 @@
 ﻿#include "Day09.h"
 
 #include <algorithm>
+#include <iostream>
+#include <ostream>
 #include <ranges>
+#include <stacktrace>
 
 void Day09::LoadProblem()
 {
@@ -27,14 +30,21 @@ void Day09::LoadProblem()
 
         reading_file = !reading_file;
     }
-    int x =0;
 }
 
 std::optional<uint64_t> Day09::SolvePart1()
 {
-    // TODO: Implement SolvePart1 logic
-    const auto disk = SortIndividual();
-    return std::nullopt;
+    const auto sorted_disk = SortIndividual();
+
+    uint64_t checksum = 0;
+    for (size_t i = 0; i < sorted_disk.size(); ++i)
+    {
+        if (sorted_disk[i].has_value())
+        {
+            checksum += static_cast<uint64_t>(i) * sorted_disk[i].value_or(0);
+        }
+    }
+    return checksum;
 }
 
 std::optional<uint64_t> Day09::SolvePart2()
@@ -45,50 +55,21 @@ std::optional<uint64_t> Day09::SolvePart2()
 
 Day09::Disk Day09::SortIndividual()
 {
-    Disk sorted_disk = expanded_disk;
+    Disk sorted_disk{expanded_disk.begin(), expanded_disk.end()};
 
-    /*
-    //const auto write_pos = std::ranges::find_if(sorted_disk,
-    //                                              [](const std::optional<int>& entry){return entry == std::nullopt;});
-    const auto write_pos = std::find(sorted_disk.begin(), sorted_disk.end(), std::nullopt);
-    const auto read_pos = std::ranges::find_if(std::ranges::reverse_view(sorted_disk), [](const std::optional<int>& entry){return entry != std::nullopt;});
+    auto write_pos = sorted_disk.begin();
+    auto read_pos = sorted_disk.end() - 1;
 
-    //if the disk is full, we have a problem
-    //if (first_empty == sorted_disk.end()) return {};
-
-
-    while (read_pos.base() != sorted_disk.begin())
+    while (read_pos > sorted_disk.begin())
     {
         if (read_pos->has_value())
         {
-            std::optional<int> entry = *read_pos;
-            sorted_disk.insert(write_pos, entry);
-            sorted_disk.insert(read_pos.base(), std::nullopt);
+            while (write_pos->has_value()) ++write_pos;
+            if (write_pos > read_pos) break;
+            
+            std::swap(*write_pos, *read_pos);
         }
-
-        --read_pos.base();
-    }
-    */
-
-    int write_pos = 0;
-
-    // Find the first nullopt position for writing
-    while (write_pos < sorted_disk.size() && sorted_disk[write_pos].has_value()) {
-        ++write_pos;
-    }
-
-    // Traverse the vector from the end
-    for (int read_pos = sorted_disk.size() - 1; read_pos >= 0; --read_pos) {
-        if (sorted_disk[read_pos].has_value() && write_pos < read_pos) {
-            // Move the element
-            sorted_disk[write_pos] = sorted_disk[read_pos];
-            sorted_disk[read_pos] = std::nullopt;
-
-            // Find the next nullopt position
-            do {
-                ++write_pos;
-            } while (write_pos < sorted_disk.size() && sorted_disk[write_pos].has_value());
-        }
+        --read_pos;
     }
 
     return sorted_disk;
