@@ -5,7 +5,7 @@ Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repositor
 
 ## ⭐ Stats
 | Day | Stars | Benchmark | Problem |
-|-----|-------|------------
+|-----|-------|------------|---------|
 | 1   | ⭐⭐  | | [Open on AoC](https://adventofcode.com/2024/day/01 |
 
 ## 🚀 Project Overview
