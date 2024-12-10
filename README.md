@@ -3,6 +3,11 @@
 
 Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repository! This project showcases my solutions to the daily programming challenges presented in Advent of Code 2024. Each solution is written in **C++23**, adhering to modern object-oriented programming practices and leveraging the latest language features.
 
+## ⭐ Stats
+| Day | Stars | Benchmark | Problem |
+|-----|-------|------------
+| 1   | ⭐⭐  | | [Open on AoC](https://adventofcode.com/2024/day/01 |
+
 ## 🚀 Project Overview
 
 The project is structured with modularity and maintainability in mind:
