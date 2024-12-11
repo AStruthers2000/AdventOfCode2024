@@ -12,7 +12,7 @@ Welcome to my [**Advent of Code 2024**](https://adventofcode.com/2024) repositor
 | [4](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day04)   | ⭐⭐  | 311µs   | 61.26ms | 34.04ms | [Open on AoC](https://adventofcode.com/2024/day/4) |
 | [5](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day05)   | ⭐⭐  | 10.95ms | 9.21ms | 30.76ms | [Open on AoC](https://adventofcode.com/2024/day/5) |
 | [6](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day06)   | ⭐  | 367µs | 577µs | N/A | [Open on AoC](https://adventofcode.com/2024/day/6) |
-| [7](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day07)   | ⭐  | 19.21ms | 7.864ms | N/A | [Open on AoC](https://adventofcode.com/2024/day/7) |
+| [7](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day07)   | ⭐⭐  | 19.97ms | 7.67ms | 12.10s | [Open on AoC](https://adventofcode.com/2024/day/7) |
 | [8](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day08)   | ⭐⭐  | 216µs | 136µs | 151µs | [Open on AoC](https://adventofcode.com/2024/day/8) |
 | [9](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day09)   | ⭐⭐  | 5.81ms | 7.76ms | 859.7ms | [Open on AoC](https://adventofcode.com/2024/day/9) |
 | [10](https://github.com/AStruthers2000/AdventOfCode2024/tree/main/Solution/Problems/Day10)   | ⭐⭐  | 30.93ms | 14µs | 11µs | [Open on AoC](https://adventofcode.com/2024/day/10) |
