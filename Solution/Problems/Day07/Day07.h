@@ -30,6 +30,10 @@ private:
 
     bool CheckSolution_Recursive(uint64_t target, const std::vector<uint64_t>& values, int index, uint64_t running_total, BasicOperation operation);
     bool CheckSolution_WithConcat_Recursive(uint64_t target, const std::vector<uint64_t>& values, int index, uint64_t running_total, BasicOperation operation);
+
+    bool GenerateOperationPermutations(int num_elements, int num_operations, const std::vector<uint64_t>& values, uint64_t target);
+    uint64_t ApplyOperations(const std::vector<BasicOperation>& ops, const std::vector<uint64_t>& values);
+    void PrintOperation(const std::vector<BasicOperation>& ops);
 };
 
 
