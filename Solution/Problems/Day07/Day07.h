@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <map>
+#include <set>
 
 #include "../Problem.h"
 
@@ -18,15 +19,17 @@ protected:
 
 
 private:
-    std::map<uint64_t, std::vector<uint64_t>> calibrations;
+    std::vector<std::pair<uint64_t, std::vector<uint64_t>>> calibrations;
 
     enum BasicOperation : uint8_t
     {
         Add,
-        Multiply
+        Multiply,
+        Concat
     };
 
     bool CheckSolution_Recursive(uint64_t target, const std::vector<uint64_t>& values, int index, uint64_t running_total, BasicOperation operation);
+    bool CheckSolution_WithConcat_Recursive(uint64_t target, const std::vector<uint64_t>& values, int index, uint64_t running_total, BasicOperation operation);
 };
 
 
