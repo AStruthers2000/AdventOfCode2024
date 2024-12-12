@@ -3,6 +3,7 @@
 #include <execution>
 #include <iostream>
 #include <queue>
+#include <unordered_map>
 
 void Day12::LoadProblem()
 {
@@ -58,53 +59,31 @@ std::optional<uint64_t> Day12::SolvePart2()
         for (const auto& [plot, perimeter] : plot_set)
         {
             const auto area = plot.size();
-            /*
-            int interior_corners = 0;
 
-            enum PerimeterPiece : uint8_t {Edge, Corner, Plant};
-            std::map<Point, PerimeterPiece> pieces;
-            std::map<Point, int> edge_counts;
-            for (const auto& p : perimeter)
+            int side_count = 0;
+
+            //check every side in the perimeter. if there is a valid side directly to the relative "left" of this side,
+            //then this side shouldn't be counted in the side_count, because this side is part of a contiguous group of sides
+            //however, if there isn't a valid side directly to the relative "left" of this side, this is the "leftmost"
+            //side of group of one or more contiguous edges, so we increment the side_count counter
+            for (const auto& [side, direction] : perimeter)
             {
-                const Point pt = p.first;
-                edge_counts[pt]++;
-                
-                //if (pieces.contains(pt) && pieces[pt] == Edge)
-                //{
-                //    pieces[pt] = Corner;
-                //}
-                //else
-                //{
-                    pieces[pt] = Edge;
-                //}
+                //get the relative "left" of the current side's direction
+                const auto look_dir = direction;
+                auto left_dir = look_dir;
+                --left_dir;
 
-                
-                switch (p.second)
-                {
-                case above:
-                case below:
-                    if (!pieces.contains({pt.first, pt.second - 1})) pieces[{pt.first, pt.second - 1}] = Corner;
-                    if (!pieces.contains({pt.first, pt.second + 1})) pieces[{pt.first, pt.second + 1}] = Corner;
-                    break;
-                case left:
-                case right:
-                    if (!pieces.contains({pt.first - 1, pt.second })) pieces[{pt.first - 1, pt.second}] = Corner;
-                    if (!pieces.contains({pt.first + 1, pt.second })) pieces[{pt.first + 1, pt.second}] = Corner;
-                    break;
-                }
-                
+                //calculate where the relative "left" would be, if it were to exist
+                const auto left_side = std::make_pair(side.first + directions_map[left_dir].first, side.second + directions_map[left_dir].second);
+
+                //check to see if the relative "left" exists in the perimeter. if it doesn't exist, we are on the "leftmost"
+                //edge of a group of one or more contiguous edges
+                if (!perimeter.contains({left_side, direction}))
+                    ++side_count;
             }
 
-            for (const auto& p : plot)
-            {
-                pieces[p] = Plant;
-            }
-
-            int exterior_corners = static_cast<int>(std::ranges::count_if(pieces, [&](const std::pair<Point, PerimeterPiece>& piece) {return piece.second == Corner;}));
-            //corners += interior_corners;
-            int edges = exterior_corners;
-            */
-            //total_cost += area * edges;
+            //cost per plot is the area * the side count
+            total_cost += area * side_count;
         }
     }
     return total_cost;
@@ -125,23 +104,19 @@ Day12::GardenPlot Day12::flood_fill(Point start, char plant_type)
 
     q.push(start);
     visited.insert(start);
-
     
-        //{1, 0}, {0, -1}, {-1, 0}};
-
-    //int perimeter = 0;
-    std::set<std::pair<Point, Direction>> perimeter;
+    std::set<std::pair<Point, Plant_Direction>> perimeter;
 
     while (!q.empty())
     {
         auto [x, y] = q.front();
         q.pop();
 
-        //for (const auto& dir : directions)
-        std::ranges::for_each(directions, [&](const auto& direction)
+        std::ranges::for_each(directions_map, [&](const std::pair<Plant_Direction, Point>& direction)
         {
-            int new_x = x + direction.first.first;
-            int new_y = y + direction.first.second;
+            auto [dir, vec] = direction;
+            int new_x = x + vec.first;
+            int new_y = y + vec.second;
 
             bool cant_visit = true;
             if (new_x >= 0 && new_x < rows && new_y >= 0 && new_y < cols)
@@ -159,14 +134,11 @@ Day12::GardenPlot Day12::flood_fill(Point start, char plant_type)
             
             if (cant_visit)
             {
-                //++perimeter;
-                perimeter.emplace(std::make_pair(new_x, new_y), direction.second);
+                perimeter.emplace(std::make_pair(new_x, new_y), dir);
             }
         });
     }
-
-    //std::cout << "Perimeter for plot " << plant_type << " is " << perimeter.size() << std::endl;
-
+    
     const GardenPlot plot = {visited, perimeter};
     return {visited, perimeter};
 }

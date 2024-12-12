@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "../Problem.h"
 
+//enum Direction : uint8_t;
+
 enum Direction : uint8_t;
 
 class Day06 : public Problem

@@ -4,6 +4,43 @@
 
 #include "../Problem.h"
 
+enum Plant_Direction : uint8_t
+{
+    up = 0, right = 1, down = 2, left = 3
+};
+
+inline Plant_Direction& operator++(Plant_Direction& direction)
+{
+    direction = static_cast<Plant_Direction>((direction + 1) % 4);
+    return direction;
+}
+
+inline Plant_Direction operator++(Plant_Direction& direction, int)
+{
+    Plant_Direction dir = direction;
+    ++direction;
+    return dir;
+}
+
+inline Plant_Direction& operator--(Plant_Direction& direction)
+{
+    switch (direction)
+    {
+    case up: direction = left; return direction;
+    case right: direction = up; return direction;
+    case down: direction = right; return direction;
+    case left: direction = down; return direction;
+    }
+    return direction;
+}
+
+inline Plant_Direction operator--(Plant_Direction& direction, int)
+{
+    Plant_Direction dir = direction;
+    --direction;
+    return dir;
+}
+
 class Day12 : public Problem
 {
 public:
@@ -21,18 +58,17 @@ private:
      std::vector<std::vector<char>> garden;
 
     using Point = std::pair<int, int>;
-
-    enum Direction : uint8_t { above, below, left, right };
-    using GardenPlot = std::pair<std::set<Point>, std::set<std::pair<Point, Direction>>>;
+    
+    using GardenPlot = std::pair<std::set<Point>, std::set<std::pair<Point, Plant_Direction>>>;
     std::map<char, std::set<GardenPlot>> plots;
 
     GardenPlot flood_fill(Point start, char plant_type);
 
-    std::vector<std::pair<Point, Direction>> directions{
-        std::make_pair(std::make_pair(0, 1), right),
-        std::make_pair(std::make_pair(1, 0), below),
-        std::make_pair(std::make_pair(0, -1), left),
-        std::make_pair(std::make_pair(-1, 0), above)
+    std::map<Plant_Direction, Point> directions_map{
+                    {up, std::make_pair(-1, 0)},
+                    {right, std::make_pair(0, 1)},
+                    {down, std::make_pair(1, 0)},
+                    {left, std::make_pair(0, -1)}
     };
 };
 
