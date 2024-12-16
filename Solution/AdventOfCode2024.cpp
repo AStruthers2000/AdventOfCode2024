@@ -41,7 +41,7 @@ enum RunMode
 };
 
 constexpr RunMode mode = Run;
-constexpr int day = 14;
+constexpr int day = 16;
 
 std::vector<std::unique_ptr<Problem>> LoadProblems()
 {
