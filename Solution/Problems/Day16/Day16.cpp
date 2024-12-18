@@ -54,8 +54,6 @@ std::optional<uint64_t> Day16::SolvePart1()
     {
         cost -= 1000;
     }
-        
-    
     
     //PrintMap();
     return cost;
@@ -83,14 +81,11 @@ std::pair<std::vector<Day16::Tile>, int> Day16::GetPathThroughMap(std::pair<int,
     std::priority_queue<PathfindingState, std::vector<PathfindingState>, std::greater<>> pq;
     std::map<std::pair<int, int>, int> min_cost;
     int new_cost = 0;
-    //std::queue<std::pair<int, int>> q;
     std::map<std::pair<int, int>, std::pair<int, int>> parent;
-    //std::set<Tile> visited;
 
     pq.push({start_position, 0, {0, 1}});
     min_cost[start_position] = 0;
     parent[start_position] = {-1, -1};
-    //visited.insert(map[start_position.first][start_position.second]);
 
     const std::vector<std::pair<int, int>> directions{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     std::pair<int, int> finish_position{-1, -1};
@@ -106,7 +101,6 @@ std::pair<std::vector<Day16::Tile>, int> Day16::GetPathThroughMap(std::pair<int,
             break;
         }
 
-        //std::ranges::for_each(directions, [&](const auto& direction)
         for (const auto& direction : directions)
         {
             const int next_x = x + direction.first;
@@ -143,7 +137,6 @@ std::pair<std::vector<Day16::Tile>, int> Day16::GetPathThroughMap(std::pair<int,
     std::vector<Tile> path;
     for (auto at = finish_position; at != std::pair(-1, -1); at = parent[at])
     {
-        //std::cout << at.first << " " << at.second << std::endl;
         path.push_back(map[at.first][at.second]);
         map[at.first][at.second].tile = Path;
     }
@@ -181,3 +174,4 @@ void Day16::PrintMap()
         std::cout << "\n";
     }
 }
+
